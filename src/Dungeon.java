@@ -16,10 +16,14 @@ public class Dungeon {
 		
 		int count = 0;
 		int roomNo = 1;
+		int ghost = 1;
+		boolean rich = false;
+		
 		char dir = ' ';
 		Scanner scan = new Scanner(System.in);
 		//q for quit
-		
+		Random rnd = new Random();
+		int rng = 1 + rnd.nextInt(4);
 		
 		while(dir != 'Q'){
 	
@@ -42,7 +46,7 @@ public class Dungeon {
 						}
 						break;
 				case 2: System.out.println("You are standing in the front room.\nYou see a piano.");
-						
+						System.out.println("(W) Exit to the West. \n(E) Exit to the East. \n(S) Exit to the South. \n(Q) Exit the Game.");
 						dir = scan.nextLine().charAt(0);
 						if(dir == 'W'){
 							roomNo = 3;
@@ -59,7 +63,8 @@ public class Dungeon {
 							return;
 						}
 						break;
-				case 3: System.out.println("abefkgaie:");
+				case 3: System.out.println("You are standing in a library.\nYou see spiders crawling on the bookshelves.");
+						System.out.println("(E) Exit to the East. \n(N) Exit to the North. \n(Q) Exit the Game.");
 						dir = scan.nextLine().charAt(0);
 					
 						if(dir == 'E'){
@@ -74,7 +79,8 @@ public class Dungeon {
 							return;
 						}
 						break;
-				case 4: System.out.println("abesgfkgaie:");
+				case 4: System.out.println("You find yourself in the kitchen. \nSmall glowing eyes in the room indicate a hidden colony of bats.");
+						System.out.println("(W) Exit to the West. \n(N) Exit to the North. \n(Q) Exit the Game.");
 						dir = scan.nextLine().charAt(0);
 					
 						if(dir == 'W'){
@@ -89,7 +95,8 @@ public class Dungeon {
 							return;
 						}
 						break;
-				case 5: System.out.println("abefkgaie:");
+				case 5: System.out.println("You enter the dining room. \nYou notice the walls are coated in dust and a small empty box resting on the table.");
+						System.out.println("(S) Exit to the South. \n(Q) Exit the Game.");
 						dir = scan.nextLine().charAt(0);
 					
 						if(dir == 'S'){
@@ -103,11 +110,31 @@ public class Dungeon {
 						break;
 						
 						//special for gold
-				case 6: System.out.println("abefkgaie:");
+				case 6: System.out.println("You magically appear standing inside a vault. \nThere are 3 sp00ky scary skel3tons.");
+						if(rich){
+							System.out.println("(1) Exit to the East to the parlor. \n(2) Exit to the East to the Secret Room. \n(Q) Exit the Game.");			
+						}
+						else{
+							System.out.println("(E) Exit to the East. \n(Q) Exit the Game.");
+						}
+								
 						dir = scan.nextLine().charAt(0);
-						
-						if(dir == 'S'){
-							roomNo = 3;
+					
+						if(dir == 'E' && !rich){
+							if(rng == 2){
+								roomNo = 8;
+								rich = true;
+							}
+							else{
+								rng = 1 + rnd.nextInt(4);
+								roomNo = 7;
+							}
+						}
+						else if(dir == '1'){
+							roomNo = 7;
+						}
+						else if(dir == '2'){
+							roomNo = 8;
 						}
 						//Spice this up
 						else if(dir != 'Q'){
@@ -116,7 +143,9 @@ public class Dungeon {
 						}
 						break;
 						
-				case 7: System.out.println("abefkgaie:");
+				case 7: System.out.println("You find yourself entering the old parlor. \nThere is a treasure chest in the middle of the room. \nDo you have the key?");
+						System.out.println("(W) Exit to the West. \n(S) Exit to the South. \n(Q) Exit the Game.");
+						
 						dir = scan.nextLine().charAt(0);
 						
 						if(dir == 'S'){
@@ -131,11 +160,13 @@ public class Dungeon {
 							return;
 						}
 						break;
-				case 8: System.out.println("abefkgaie:");
+				case 8: System.out.println("Congratulations! You found the secret room! \nPiles of gold everywhere!");
+						System.out.println("(W) Exit to the West. \n(Q) Exit the Game.");
 						dir = scan.nextLine().charAt(0);
 						
 						if(dir == 'W'){
 							roomNo = 6;
+							System.out.println("Why would you leave this shiny place?");
 						}
 						//Spice this up
 						else if(dir != 'Q'){
@@ -145,12 +176,19 @@ public class Dungeon {
 						break;
 			
 			}
+			count++;
 			
 			
 					
 		}
 		//
+
+		ghost = 1 + rnd.nextInt(4);
+		if(ghost == 3){
+			System.out.println("A ghost quietly follows you out the door of the house.");
+		}
 		
+		System.out.println("You visited " + count + " room(s). Please come again!");
 		
 		
 	}

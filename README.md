@@ -14,6 +14,7 @@ Zork is a famous text-only adventure game for the computer. Users would type com
 
 Write an application that asks the user what direction they wish to travel in. Once they tell you the direction, move them to the next room and tell them what is in it and what direction the other exits are.
 
+//IGNORE THIS
 When you develop your program you must include each room in its own method. (Reminder: Creating Methods).  The only role of the main method is to get input from the user and direct the user to the appropriate room.
 
 Your program shall allow the user to move from one room back and forth to any other connected room.

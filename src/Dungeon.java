@@ -41,7 +41,8 @@ public class Dungeon {
 							return;
 						}
 						break;
-				case 2: System.out.println("abekgaie:");
+				case 2: System.out.println("You are standing in the front room.\nYou see a piano.");
+						
 						dir = scan.nextLine().charAt(0);
 						if(dir == 'W'){
 							roomNo = 3;

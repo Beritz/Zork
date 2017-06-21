@@ -25,14 +25,23 @@ public class Dungeon {
 		Random rnd = new Random();
 		int rng = 1 + rnd.nextInt(4);
 		
+		int[] coins = new int[8];
+		String[] items = new String[8];
+		for (int i = 0; i < coins.length; i++) {
+			coins[i] = rnd.nextInt(1001);
+		}
+		int userCoins = 0;
+		int npc = rnd.nextInt(8) + 1;
+		
 		while(dir != 'Q'){
-	
-			System.out.println("Room Number is: "  + roomNo);
 		
 			switch(roomNo){
 			
 				
 				case 1: System.out.println("You are standing in the foyer of an old house.\nYou see a dead scorpion.");
+						if (coins[0] > 0) {
+							System.out.printf("There are %f coins in this room!");
+						}
 						System.out.println("(N) Exit to the North. \n(Q) Exit the Game.");
 
 						dir = scan.nextLine().charAt(0);

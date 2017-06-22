@@ -44,11 +44,12 @@ public class Dungeon {
 				
 				case 1: System.out.println("You are standing in the foyer of an old house.\nYou see a dead scorpion.");
 						if (coins[0] > 0) {
-							System.out.printf("There are %f coins in this room! Would you like to pick them up? (Y/N)", coins[0]);
+							System.out.printf("You have " + userCoins + " coins! There are %d coins in this room! Would you like to pick them up? (Y/N)", coins[0]);
 							if (scan.nextLine().charAt(0) == 'Y') {
 								userCoins += coins[0];
 							}
 						}
+						items[0] = "Dead scorpion";
 						System.out.println("(N) Exit to the North. \n(Q) Exit the Game.");
 
 						dir = scan.nextLine().charAt(0);
@@ -63,11 +64,12 @@ public class Dungeon {
 						break;
 				case 2: System.out.println("You are standing in the front room.\nYou see a piano.");
 						if (coins[1] > 0) {
-							System.out.printf("There are %f coins in this room! Would you like to pick them up? (Y/N)", coins[1]);
+							System.out.printf("There are %d coins in this room! Would you like to pick them up? (Y/N)", coins[1]);
 							if (scan.nextLine().charAt(0) == 'Y') {
 								userCoins += coins[1];
 							}
 						}
+						items[1] = "Piano";
 						System.out.println("(W) Exit to the West. \n(E) Exit to the East. \n(S) Exit to the South. \n(Q) Exit the Game.");
 						dir = scan.nextLine().charAt(0);
 						if(dir == 'W'){
@@ -87,11 +89,12 @@ public class Dungeon {
 						break;
 				case 3: System.out.println("You are standing in a library.\nYou see spiders crawling on the bookshelves.");
 						if (coins[2] > 0) {
-							System.out.printf("There are %f coins in this room! Would you like to pick them up? (Y/N)", coins[2]);
+							System.out.printf("There are %d coins in this room! Would you like to pick them up? (Y/N)", coins[2]);
 							if (scan.nextLine().charAt(0) == 'Y') {
 								userCoins += coins[2];
 							}
 						}
+						items[2] = "Crawling spiders";
 						System.out.println("(E) Exit to the East. \n(N) Exit to the North. \n(Q) Exit the Game.");
 						dir = scan.nextLine().charAt(0);
 					
@@ -109,11 +112,12 @@ public class Dungeon {
 						break;
 				case 4: System.out.println("You find yourself in the kitchen. \nSmall glowing eyes in the room indicate a hidden colony of bats.");
 						if (coins[3] > 0) {
-							System.out.printf("There are %f coins in this room! Would you like to pick them up? (Y/N)", coins[3]);
+							System.out.printf("There are %d coins in this room! Would you like to pick them up? (Y/N)", coins[3]);
 							if (scan.nextLine().charAt(0) == 'Y') {
 								userCoins += coins[3];
 							}
 						}
+						items[3] = "Bats";
 						System.out.println("(W) Exit to the West. \n(N) Exit to the North. \n(Q) Exit the Game.");
 						dir = scan.nextLine().charAt(0);
 					
@@ -131,11 +135,12 @@ public class Dungeon {
 						break;
 				case 5: System.out.println("You enter the dining room. \nYou notice the walls are coated in dust and a small empty box resting on the table.");
 						if (coins[4] > 0) {
-							System.out.printf("There are %f coins in this room! Would you like to pick them up? (Y/N)", coins[4]);
+							System.out.printf("There are %d coins in this room! Would you like to pick them up? (Y/N)", coins[4]);
 							if (scan.nextLine().charAt(0) == 'Y') {
 								userCoins += coins[4];
 							}
 						}
+						items[4] = "Dust and an empty box";
 						System.out.println("(S) Exit to the South. \n(Q) Exit the Game.");
 						dir = scan.nextLine().charAt(0);
 					
@@ -151,6 +156,13 @@ public class Dungeon {
 						
 						//special for gold
 				case 6: System.out.println("You magically appear standing inside a vault. \nThere are 3 sp00ky scary skel3tons.");
+						if (coins[5] > 0) {
+							System.out.printf("There are %d coins in this room! Would you like to pick them up? (Y/N)", coins[5]);
+							if (scan.nextLine().charAt(0) == 'Y') {
+								userCoins += coins[5];
+							}
+						}
+						items[5] = "3 skeletons";
 						if(rich){
 							System.out.println("(1) Exit to the East to the parlor. \n(2) Exit to the East to the Secret Room. \n(Q) Exit the Game.");			
 						}
@@ -184,6 +196,12 @@ public class Dungeon {
 						break;
 						
 				case 7: System.out.println("You find yourself entering the old parlor. \nThere is a treasure chest in the middle of the room. \nDo you have the key?");
+						if (coins[6] > 0) {
+							System.out.printf("There are %d coins in this room! Would you like to pick them up? (Y/N)", coins[6]);
+							if (scan.nextLine().charAt(0) == 'Y') {
+								userCoins += coins[6];
+							}
+						}
 						System.out.println("(W) Exit to the West. \n(S) Exit to the South. \n(Q) Exit the Game.");
 						
 						dir = scan.nextLine().charAt(0);
@@ -201,6 +219,12 @@ public class Dungeon {
 						}
 						break;
 				case 8: System.out.println("Congratulations! You found the secret room! \nPiles of gold everywhere!");
+						if (coins[7] > 0) {
+							System.out.printf("There are %d coins in this room! Would you like to pick them up? (Y/N)", coins[7]);
+							if (scan.nextLine().charAt(0) == 'Y') {
+								userCoins += coins[7];
+							}
+						}
 						System.out.println("(W) Exit to the West. \n(Q) Exit the Game.");
 						dir = scan.nextLine().charAt(0);
 						
@@ -216,6 +240,7 @@ public class Dungeon {
 						break;
 			
 			}
+
 			count++;
 			
 			

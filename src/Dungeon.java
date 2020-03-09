@@ -5,22 +5,14 @@ import java.util.Scanner;
 
 public class Dungeon
 {
-	int count = 0;
-	public int roomNo = 1;
-	int ghost = 1;
-	boolean rich = false;
-	
 	String dir = "";
 	Scanner scan = new Scanner(System.in);
+	Stuff game = new Stuff();
 
 	Random rnd = new Random();
-	int rng = 1 + rnd.nextInt(4);
 	
 	public int[] coins = new int[8];
 	String[] items = new String[8];
-	
-	int userCoins = 0;
-	int npc = rnd.nextInt(8);
 	int lamp = rnd.nextInt(8) + 1;
 	boolean hasLamp = false;
 
@@ -30,7 +22,7 @@ public class Dungeon
 		if (coins[x] > 0) {
 			System.out.printf("There are %d coins in this room! Would you like to pick them up? (Y/N) ", coins[x]);
 			if (scan.nextLine().charAt(0) == 'y') {
-				userCoins += coins[x];
+				game.setUserCoins(game.getUserCoins()+coins[x]);
 				coins[x] = 0;
 			}
 		}
@@ -45,7 +37,7 @@ public class Dungeon
 
 		dir = scan.nextLine().toLowerCase();
 		if(dir.equals("n") || dir.equals("front room")){
-			roomNo = 2;
+			game.setRoomNo(2);
 		}
 
 		else if(!dir.equals("q")){
@@ -60,13 +52,13 @@ public class Dungeon
 		System.out.println("Exit 'w'est to the 'library'. \nExit 'e'ast to the 'kitchen'. \nExit 's'outh to the 'foyer'. \nExit the Game (Q).");
 		dir = scan.nextLine().toLowerCase();
 		if(dir.equals("w") || dir.equals("library")){
-			roomNo = 3;
+			game.setRoomNo(3);
 		}
 		else if(dir.equals("e") || dir.equals("kitchen")){
-			roomNo = 4;
+			game.setRoomNo(4);
 		}
 		else if(dir.equals("s") || dir.equals("foyer")){
-			roomNo = 1;
+			game.setRoomNo(1);
 		}
 		else if(!dir.equals("q")){
 			System.out.println("You were actually dead the whole time. Game has ended.");
@@ -82,10 +74,10 @@ public class Dungeon
 		dir = scan.nextLine().toLowerCase();
 	
 		if(dir.equals("e") || dir.equals("front room")){
-			roomNo = 2;
+			game.setRoomNo(2);
 		}
 		else if(dir.equals("n") || dir.equals("dining room")){
-			roomNo = 5;
+			game.setRoomNo(5);
 		}
 		else if(!dir.equals("q")){
 			System.out.println("You were actually dead the whole time. Game has ended.");
@@ -101,10 +93,10 @@ public class Dungeon
 		dir = scan.nextLine().toLowerCase();
 	
 		if(dir.equals("w") || dir.equals("front room")){
-			roomNo = 2;
+			game.setRoomNo(2);
 		}
 		else if(dir.equals("n") || dir.equals("parlor")) {
-			roomNo = 7;
+			game.setRoomNo(7);
 		}
 		else if(!dir.equals("q")){
 			System.out.println("You were actually dead the whole time. Game has ended.");
@@ -120,7 +112,7 @@ public class Dungeon
 		dir = scan.nextLine().toLowerCase();
 	
 		if(dir.equals("s") || dir.equals("library")) {
-			roomNo = 3;
+			game.setRoomNo(3);
 		}
 
 		else if(!dir.equals("q")){
@@ -133,7 +125,7 @@ public class Dungeon
 	{
 		gatherCoins(5);
 		items[5] = "3 skeletons";
-		if(rich){
+		if(game.isRich() == true){
 			System.out.println("Exit east to the 'parlor' \nExit east to the 'secret room'. \nExit the Game (Q).");			
 		}
 		else{
@@ -142,22 +134,22 @@ public class Dungeon
 				
 		dir = scan.nextLine().toLowerCase();
 	
-		if((dir.equals("e") || dir.equals("parlor")) && !rich){
-			if(rng == 2){
-				roomNo = 8;
-				rich = true;
+		if((dir.equals("e") || dir.equals("parlor")) && !game.isRich() == true){
+			if(game.getRng() == 2){
+				game.setRoomNo(8);
+				game.setRich(true);
 			}
 			else{
-				rng = 1 + rnd.nextInt(4);
-				roomNo = 7;
+				game.setRng(1+rnd.nextInt(4));
+				game.setRoomNo(7);
 			}
 
 		}
 		else if(dir.equals("parlor")){
-			roomNo = 7;
+			game.setRoomNo(7);//roomNo = 7;
 		}
 		else if(dir.equals("secret room")){
-			roomNo = 8;
+			game.setRoomNo(8);//roomNo = 8;
 		}
 		else if(!dir.equals("q")){
 			System.out.println("You were actually dead the whole time. Game has ended.");
@@ -174,10 +166,10 @@ public class Dungeon
 		dir = scan.nextLine().toLowerCase();
 		
 		if (dir.equals("s") ||dir.equals("kitchen")) {
-			roomNo = 4;
+			game.setRoomNo(4);//roomNo = 4;
 		}
 		else if (dir.equals("w") || dir.equals("vault")) {
-			roomNo = 6;
+			game.setRoomNo(6);//roomNo = 6;
 		}
 		else if(!dir.equals("q")){
 			System.out.println("You were actually dead the whole time. Game has ended.");
@@ -193,7 +185,7 @@ public class Dungeon
 		dir = scan.nextLine().toLowerCase();
 		
 		if (dir.equals("w") || dir.equals("vault")) {
-			roomNo = 6;
+			game.setRoomNo(6);
 			System.out.println("Why would you leave this shiny place?");
 		}
 		else if(!dir.equals("q")){
@@ -204,18 +196,21 @@ public class Dungeon
 
 	public Dungeon()
 	{
+		int count = 0;
 		//System.out.println("Hello2222");
 		for (int i = 0; i < coins.length; i++) {
 			coins[i] = rnd.nextInt(1001);
 		}
-		coins[npc] = 0;
+		game.setRoomNo(1);
+		game.setNpc(rnd.nextInt(8));
+		coins[game.getNpc()] = 0;
 		while(!dir.equals("q")){
-			if (roomNo == npc) {
+			if (game.getRoomNo() == game.getNpc()) {
 				System.out.println("Oh no! You stumble across the path of a giant mountain troll! It picks you up by the leg and shakes you so that all of your coins fall out of your pockets. It drops you to the ground and runs away with all of your money. You just got mugged by a mountain troll!");
-				userCoins = 0;
+				game.setUserCoins(0);
 			}
-			System.out.printf("You have %d coins! \n",userCoins);
-			switch(roomNo){
+			System.out.printf("You have %d coins! \n",game.getUserCoins());
+			switch(game.getRoomNo()){
 				case 1: foyer(); break;
 				case 2: front_room(); break;
 				case 3: library(); break;
@@ -227,13 +222,13 @@ public class Dungeon
 			}
 			count++;
 		}
-		ending();
+		ending(count);
 	}
 
-	public void ending()
+	public void ending(int count)
 	{
-		ghost = 1 + rnd.nextInt(4);
-		if(ghost == 3){
+		game.setGhost(1 + rnd.nextInt(4));
+		if(game.getGhost() == 3){
 			System.out.println("A ghost quietly follows you out the door of the house.");
 		}
 		
@@ -244,13 +239,13 @@ public class Dungeon
 				System.out.println(items[i]);
 			}
 		}
-		System.out.printf("You left with %d coins. Congratulations!!", userCoins);
+		System.out.printf("You left with %d coins. Congratulations!!", game.getUserCoins());
 		
 	}
 
 	public static void main(String[] args) 
 	{
 		//System.out.println("Hello");
-		Dungeon game = new Dungeon();
+		new Dungeon();
 	}
 }
